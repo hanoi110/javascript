@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>正则</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//正则：他是一个规则，用来处理字符串的一个规则
+			//处理
+			//1）判断一个字符串是否符合我们制定的规则-》test:  reg.test(str)
+			/*var reg = /\d/;
+			console.log(reg.test("hanoi"));
+			console.log(reg.test("haan13oi"));
+			console.log(reg.test("123"));*/
+			
+			//2)把字符串中符合我们正则规则的内容捕获到-> exec:  reg,exec(str)
+			/*var reg = /\d/;
+			console.log(reg.exec("hanoi"));
+			console.log(reg.exec("haan13oi"));*/
+			
+			
+			//2.如何创建一个正则？
+			//1）自变量方式
+			var reg = /\d/;
+			//2)实例创建方式
+			var reg = new RegExp("");
+			
+			//3.验证邮箱的正则(简版)
+			//左边： 数字、字母、下划线、.、
+			var reg = /^[\w.-]+@[0-9a-zA-Z]+(\.[a-zA-Z]{2,4}){1,2}$/;
+			
+			//4.中国标准真实姓名 2-4 位汉字
+			var reg = /^[\u4e00-\u9fa5]{2,4}$/;
+			
+			//5.身份证号码
+			/\s+/g
+			
+			//6.将小写的数字替换成大写的中文数字
+			var str = "阿里山的覅哦按时：123456";
+			var ary = ["零","壹","贰","叁","肆","伍","陆","柒","捌","玖"];
+			str = str.replace(/\d/g, function(){
+				return ary[arguments[0]];
+			});
+
+			//7.获取一字符串出现次数最多的字符
+			var str1 = "hanoisadhshfudafgdasugJJJJJJJJfdguyfgs";
+			//1)获取每一个字符出现的次数
+			var obj = {};
+			str1.replace(/[a-z]/gi, function() {
+				var val = arguments[0];
+				obj[val] >=1 ? obj[val] += 1 : obj[val] = 1;
+			});
+			//2)获取最多出现的次数
+			var maxNum = 0;
+			for (var key in obj) {
+				obj[key] > maxNum ? maxNum = obj[key] : null;
+			}
+			//3)把所有符合出现maxNum次数的都获取到
+			var ary = [];
+			for (var key in obj) {
+				obj[key] === maxNum ? ary.push(key) : null;
+			}
+			//console.log("出现次数最多的字符是 " + ary.toString() + " 出现了 " + maxNum +" 次");
+			
+			//8.模板引擎实现的初步原理
+			var str = "my name is {0}, my age is {1}, i form {2}, i love {3}~";
+			var ary =["hanoi","24","china","javascript"];
+			str = str.replace(/{(\d+)}/g, function() {
+				return ary[arguments[1]];
+			})
+			//console.log(str);
+			
+			//9.获取url参数
+			var str = "https://www.baidu.com.html?mid=10000$cid=146532$app=1.0";
+			var reg = /([^?=$]+)=([^?=$]+)/g;
+			
+			var obj = {};
+			str.replace(reg, function() {
+				obj[arguments[1]] = arguments[2];
+			});
+			//console.log(obj);
+		</script>
+	</body>
+</html>

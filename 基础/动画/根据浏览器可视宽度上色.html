@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <script type="text/javascript" src="./jquery1.0.js"></script>
+    <script type="text/javascript">
+    //需求：浏览器每次更改大小，判断是否符合某一标准然后给背景上色
+    // >> >960红色 640< 蓝色 < 960  <640绿色
+    window.onresize = fn;
+    fn();
+    function fn() {
+    	if (client().width>960) {
+    		document.body.style.backgroundColor = "red";
+    	} else if (client().width>640) {
+    		document.body.style.backgroundColor = "blue";
+    	} else {
+    		document.body.style.backgroundColor = "green";
+    	}
+    }
+    </script>
+    </body>
+</html>

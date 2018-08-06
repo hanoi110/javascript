@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>跑马灯</title>
+<style type="text/css">
+	*{
+		padding: 0;
+		margin: 0;
+		font: 14px "微软雅黑";
+	}
+	#box {
+		width: 1000px;
+		text-align: center;
+		border: 5px dashed #daa;
+		background-color: #ccc;
+		color: #000;
+		margin: 10px auto;
+		padding: 5px 10px;
+	}
+	#wrap {
+		height: 35px;
+		line-height: 35px;
+		overflow: hidden;
+		white-space: nowrap;/* 强制文字不换行 */
+	}
+	#wrap span {
+		font-weight: 700;
+		font-size: 20px;
+		color: #f00;
+	}
+	#wrap div {
+		display: inline-block;
+	}
+</style>
+</head>
+<body>
+<div id="box">
+	<div id="wrap">
+		<div id="conBegin">
+			<span>通知：</span>第一步 ：进入到已存在的目录  cd (/file)第二步： 初始化git  init第三步： 添加远程仓库地址  git remote add origin  (address)第四步：  添加本地代码  git add .第五步： 提交本地代码 git commit -m "init"第六步： 提交到远程仓库 git push origin master 
+		</div>
+		<div id="conEnd">
+			<span>通知：</span>第一步 ：进入到已存在的目录  cd (/file)第二步： 初始化git  init第三步： 添加远程仓库地址  git remote add origin  (address)第四步：  添加本地代码  git add .第五步： 提交本地代码 git commit -m "init"第六步： 提交到远程仓库 git push origin master 
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var box = document.querySelector('#box');
+	var wrap = document.querySelector('#wrap');
+	var conBegin = document.querySelector('#conBegin');
+
+	function move() {
+		wrap.scrollLeft++;
+		var curLeft = wrap.scrollLeft;
+		if (curLeft >= 1633.11) {
+			wrap.scrollLeft = 0;
+		}
+	}
+	var timer = window.setInterval(move,10);
+	box.onmouseover = function() {
+		clearInterval(timer);
+	}
+	
+	box.onmouseout = function() {
+		timer = window.setInterval(move,10);
+	}
+</script>
+</body>
+</html>

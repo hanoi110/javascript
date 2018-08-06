@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>批量设置原型上的属性和方法</title>
+	</head>
+	<body>
+		<div id="div"></div>
+		<script type="text/javascript">
+			"use struct"
+			var obj = {name:"hanoi"};
+			function fn(num1, num2) {
+				console.log(num1+ num2);
+				console.log(this);
+			}
+		
+			//call(this, argument), apply(this, [argument]), bind(IE6~8不支持)
+			var jsonObj = '{"name":"珠峰","age":"hanoi"}';
+			//JSON.parse()把JSON的字符串转换为JSON格式的对象
+			//JSON.stringify()把JSON格式的对象转换为JSON的字符串
+			console.log(JSON.parse(jsonObj));
+		</script>
+	</body>
+</html>

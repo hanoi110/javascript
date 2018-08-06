@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>云梯</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			.screen {
+				height: 800px;
+				width: 100%;
+				color: #fff;
+			}
+			.screen-1 {background-color: aquamarine;}
+			.screen-2 {background-color: goldenrod;}
+			.screen-3 {background-color: darkcyan;}
+			.screen-4 {background-color: chartreuse;}
+			.screen-5 {background-color: darkgoldenrod;}
+			.screen-6 {background-color: fuchsia;}
+			.screen-7 {background-color: blueviolet;}
+			.outline {
+				position: fixed;
+				width:86px;
+				bottom: 100px;
+				right: 100px;
+				background-color: #fff;
+				border: 2px solid #000000;
+				display: none;
+			}
+			.outline__item {
+				float: left;
+				color: #000;
+				text-decoration: none;
+				text-align: center;
+				border-bottom: 1px solid #cccccc;
+				padding: 10px;
+			}
+			.outline__item:hover,
+			.outline__item_active {
+				color: red;
+			}
+
+
+		</style>
+	</head>
+	<body>
+		<div class="screens">
+			<div class=" screen screen-0">screen-0</div>
+			<div class=" screen screen-1">screen-1</div>
+			<div class=" screen screen-2">screen-2</div>
+			<div class=" screen screen-3">screen-3</div>
+			<div class=" screen screen-4">screen-4</div>
+			<div class=" screen screen-5">screen-5</div>
+			<div class=" screen screen-6">screen-6</div>
+			<div class=" screen screen-7">screen-7</div>
+		</div>
+
+		<nav class="outline">
+			<a class="outline__item" href="javascript:;">screen-1</a>
+			<a class="outline__item" href="javascript:;">screen-2</a>
+			<a class="outline__item" href="javascript:;">screen-3</a>
+			<a class="outline__item" href="javascript:;">screen-4</a>
+			<a class="outline__item" href="javascript:;">screen-5</a>
+			<a class="outline__item" href="javascript:;">screen-6</a>
+			<a class="outline__item" href="javascript:;">screen-7</a>
+		</nav>
+		<script type="text/javascript">
+			var getEle = function(selector) {
+				return document.querySelector(selector);
+			}
+			var getAllEle = function(selector) {
+				return document.querySelectorAll(selector);
+			}
+			var getCls = function(element) {
+				return element.getAttribute('class');
+			}
+			var setCls = function(element, cls) {
+				return element.setAttribute('class', cls)
+			}
+			var hasCls = function(element, cls) {
+				var reg = new RegExp("(^| +)" + cls + "( +|$)");
+				return reg.test(element.className);
+			}
+			var addCls = function(element, cls) {
+				var baseCls = getCls(element);
+				if (baseCls.indexOf(cls) === -1) {
+					return setCls(element, baseCls +' '+ cls);
+				}
+			}
+			var delCls = function(element, cls) {
+				var baseCls = getCls(element);
+				if (baseCls.indexOf(cls) != -1) {
+					return setCls(element,baseCls.split(cls).join(' ').replace(/\s+/g,' '));
+				}
+			}
+
+			//滑动动画
+			var navItems = getAllEle('.outline__item');
+			function setNavJump(i) {
+				var item = navItems[i];
+				item.onclick = function() {
+					witchOutlineActive(i);
+					var duration = 500,
+						interval = 10,
+						startPoint = document.documentElement.scrollTop || document.body.scrollTop ,
+						endPoint = (i+1)*800,
+						target = Math.abs(startPoint-endPoint),
+						step = Math.ceil(target/duration*interval);
+						console.log(Math.random());
+					//->计算完成步长后，让当前的页面每隔inetrval这么长的时间走一步；在上一次的scrollTop的基础上-步长
+					clearInterval(timer);
+					var timer  = setInterval(function() {
+						var curtop = document.documentElement.scrollTop || document.body.scrollTop;
+						if (curtop == endPoint){
+							clearInterval(timer);
+							//window.onscroll = computedDisplay;//动画完成后在绑定
+							return;
+						}
+						if (curtop > endPoint) {
+							curtop -= step;
+							document.documentElement.scrollTop = curtop;
+							document.body.scrollTop = curtop;
+						}
+						if (curtop < endPoint) {
+							curtop += step;
+							document.documentElement.scrollTop = curtop;
+							document.body.scrollTop = curtop;
+						}
+					}, 10);
+				}
+			};
+
+			for (var i=0;i<navItems.length;i++) {
+				setNavJump(i);
+			};
+			function witchOutlineActive(idx) {
+				for (var i=0;i<navItems.length;i++) {
+					delCls(navItems[i], 'outline__item_active');
+				}
+				addCls(navItems[idx], 'outline__item_active');
+			}
+			window.onscroll = function() {
+					var curTop = document.documentElement.scrollTop || document.body.scrollTop;
+					var outline = getEle('.outline');
+					outline.style.display = curTop < 350 ? 'none':'block';
+					if (curTop > 800*1-10 ) {
+						witchOutlineActive(0);
+					}
+					if (curTop > 800*2-10) {
+						witchOutlineActive(1);
+					}
+					if (curTop > 800*3-10) {
+						witchOutlineActive(2);
+					}
+					if (curTop > 800*4-10) {
+						witchOutlineActive(3);
+					}
+					if (curTop > 800*5-10) {
+						witchOutlineActive(4);
+					}
+					if (curTop > 800*6-10) {
+						witchOutlineActive(5);
+					}
+					if (curTop > 800*7-10) {
+						witchOutlineActive(6);
+					}
+				}
+		</script>
+	</body>
+</html>

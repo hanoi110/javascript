@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			body, html {
+				height: 100%;
+			}
+			ul {
+				list-style: none;
+				height: 100%;
+			}
+			ul li {
+				height: 100%;
+			}
+			ol {
+				list-style: none;
+				position: fixed;
+				top: 80px;
+				left: 50px;
+			}
+			ol li {
+				width: 50px;
+				height: 50px;
+				border: 1px solid #000;
+				text-align: center;
+				line-height: 50px;
+				margin-top: -1px;
+				cursor: pointer;
+			}
+        </style>
+    </head>
+    <body>
+    <ul>
+    	<li>鞋子区域</li>
+        <li>袜子区域</li>
+        <li>裤子区域</li>
+        <li>裙子区域</li>
+        <li>帽子区域</li>
+    </ul>
+    <ol>
+    	<li>鞋子</li>
+        <li>袜子</li>
+        <li>裤子</li>
+        <li>裙子</li>
+        <li>帽子</li>
+    </ol>
+    <script src="animate.js"></script>
+    <script type="text/javascript">
+    var ul = document.getElementsByTagName('ul')[0];
+    var ol = document.getElementsByTagName('ol')[0];
+    var ulLiArr = ul.children;
+    var olLiArr = ol.children;
+    var target = 0,leader = 0, timer = null;
+    //1.指定ul和ol的背景色，对应的li背景色相同
+    var arrColor = ["pink","blue","yellow","orange","green"];
+    //for 循环上色
+    for (var i = 0 ; i < arrColor.length; i++ ) {
+    	ulLiArr[i].style.backgroundColor = arrColor[i];
+    	olLiArr[i].style.backgroundColor = arrColor[i];
+    	//绑定索引值
+    	olLiArr[i].index = i;
+    	olLiArr[i].onclick = function() {
+    		target = ulLiArr[this.index].offsetTop;
+    		clearInterval(timer);
+    		timer = setInterval(function() {
+    			var step = (target-leader)/10;
+    			step = step>0?Math.ceil(step):Math.floor(step);
+    			leader += step;
+    			window.scrollTo(0,leader);
+    			if (Math.abs(target-leader)<=Math.abs(step)) {
+    				window.scrollTo(0,target);
+    				clearInterval(timer);
+    			}
+    		},25);
+    	}
+    }
+    window.onscroll = function() {
+    	leader = scroll().top;
+    }
+    </script>
+    </body>
+</html>

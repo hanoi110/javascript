@@ -1,0 +1,18 @@
+/*
+* @Author: Administrator
+* @Date:   2018-07-05 15:08:04
+* @Last Modified by:   Administrator
+* @Last Modified time: 2018-07-05 15:56:59
+*/
+.job__nav-item__user{
+	transition: all 2s;
+}
+.job__nav-item__user__init{
+	opacity: 0;
+}
+.job__nav-item__user__done{
+	opacity: 0;
+}
+.job__nav-item__user__translate{
+	transform: translate(0, 100%);
+}

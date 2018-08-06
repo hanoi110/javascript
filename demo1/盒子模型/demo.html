@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js盒子模型</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			.box {
+				width: 200px;
+				height: 200px;
+				margin: 100px;
+				padding: 20px;
+				overflow-y: scroll;
+				border:5px solid greenyellow;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box box1 box2" id="box">要得到你必须付出，要付出你还要学会坚持，如果你真觉得很难，那你就放弃，但是一旦放弃就不要在抱怨
+		我觉得人生就是这样，世界真的是平衡的，每个人都是通过自己的努力，去决定自己生活的样子；<p>hanoi</p>>要得到你必须付出，要付出你还要学会坚持，如果你真觉得很难，那你就放弃，但是一旦放弃就不要在抱怨
+		我觉得人生就是这样，世界真的是平衡的，每个人都是通过自己的努力，去决定自己生活的样子；
+		</div>
+		<script type="text/javascript">
+			var box = document.getElementById('box');
+			console.dir(box);
+			console.log(window.getComputedStyle(box,null));
+		</script>
+	</body>
+</html>

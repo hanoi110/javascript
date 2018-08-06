@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+			.box1{
+				margin: 0;
+				padding: 5px;
+				height: 200px;
+				background-color: #ddd;
+				position: relative;
+			}
+			button{
+				margin: 5px;
+			}
+			.box2 {
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+				
+			}
+        </style>
+    </head>
+    <body>
+    <div class="box1">
+    	<button>运动到200</button>
+    	<button>运动到400</button>
+    	<div class="box2"></div>
+    </div>
+    <script type="text/javascript">
+    	var btnArr = document.getElementsByTagName('button');
+    	var box2 = document.getElementsByClassName('box2')[0];
+    	//1.闪动
+    	// btn.onclick = function() {
+    	// 	box.style.left = 500 + 'px';
+    	// }
+
+    	//2.匀速动画
+    	/*btn.onclick = function() {
+    		clearInterval(timer);
+    		var timer = setInterval(function () {
+    			box.style.left = box.offsetLeft + 10 +'px';
+    			if (box.style.left === '500px') {
+    				clearInterval(timer);
+    			}
+    		},30);
+    	}*/
+    	//3.封装动画
+    	/*function animate(target) {
+    		var timer = setInterval(function () {
+    			box.style.left = box.offsetLeft + 10 + 'px';
+    			if (box.offsetLeft === target) {
+    				clearInterval(timer);
+    			}
+    		},30);
+    	}*/
+    	btnArr[0].onclick = function() {
+    		animate(box2,200);
+    	}
+    	btnArr[1].onclick = function() {
+    		animate(box2,400);
+    	}
+    	//4.封装动画(去BUG版+最终版)
+    	function animate(ele,target) {
+    		//使用定时器，先清除定时器
+    		clearInterval(ele.timer);
+    		//步长不能为恒定值
+    		var speed = target > ele.offsetLeft ? 10 : -10;
+    		ele.timer = setInterval(function() {
+    			var curLeft = target - ele.offsetLeft;
+    			ele.style.left = ele.offsetLeft + speed + 'px';
+    			if (Math.abs(curLeft)<Math.abs(speed)) {
+    				ele.style.left = target + 'px';
+    				clearInterval(ele.timer);
+    			}
+    		},30);
+    	}
+    </script>
+    </body>
+</html>

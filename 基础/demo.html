@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>转义符</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*console.log("hanoi\n123");//换行
+		console.log("hanoi\t123");//制表
+		console.log("hanoi\b123");//空格
+		console.log("hanoi\r123");//回车
+		console.log("hanoi\f123");//进纸
+		console.log("hanoi\\");//斜杠
+		console.log("hanoi\'");//单引号
+		console.log("hanoi\"");//双引号
+		console.log("hanoi\x41");//以十六进制代码nn表示一个字符
+		console.log("hanoi\u03a3");//以十六进制代码nnnn表示一个Unicode字符*/
+		/*var a = '100ji',b=100,c=-a,d= ''+b;
+		console.log(typeof(c),typeof(d));
+		console.log(c,d);//将字符串转换为数字可以在string前添加-，将number类型转换为string可以用number+'',NaN instansof number*/
+		/*var message;
+		if (message) {alert('有值');} else {alert('无值'); }*/
+
+		/*三种转换为字符串的方法：1.toString()；2.String(); 3.字符串拼接''+
+		*number.toString(N);将number转换为N进制的字符串
+		*String(null);String(undefined);String()存在的意义就是把一些没有toString(),可以用String(),如：undefined和 null
+		*/
+	
+		/*
+		三个把值转换为数值类型的函数：Number()、parseInt()、parseFloat()
+		Number()可以把任意值转换成数值，
+		 */
+		/*console.log(parseInt('12.3abc'));//12
+		console.log(parseInt('abc12.3abc'));//NaN
+		console.log(parseInt(''));//NaN
+		console.log(parseInt('10'));//10
+		console.log(parseInt('0xA'));//10
+
+		console.log(parseFloat('12.3abc'));//12.3
+		console.log(parseFloat('c12.3abc'));//NaN
+		console.log(parseFloat(''));//NaN
+		console.log(parseFloat('10'));//10
+		console.log(parseFloat('0xA'));//0*/
+		/*
+		*两种方法转换布尔类型的方式：1.Boolean() 2.if()
+		*转换为false的值：false '' 0 NaN null undefined
+		 */
+		/*循环语句for*/
+		var sum = 0, avg=0 ,sumOdd=0,sumEven=0;
+		var aryOdd = [],aryEven = [];
+		for (var i = 0 ; i < 100 ; i++ ) {
+			if ( i%2 !== 0 ) {
+				aryOdd[aryOdd.length] = i;
+			}
+		}
+		/*字符串练习*/
+		var str = "abaasdffggghhjjkkgfddsssss3444343";
+		//1.字符串的长度
+		console.log(str.length);
+		//2.取出指定位置的字符,如0,3,6,9等
+		console.log(str.charAt(0),str.charAt(3),str.charCodeAt(6),str.charAt(9));
+		//3.查找指定字符是否在以上字符串存在，如i,c,b等
+		console.log(str.indexOf('i',5),str.indexOf('c'),str.indexOf('b',5));
+		
+	</script>
+</body>
+</html>

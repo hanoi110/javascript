@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件流</title>
+		<script src="../js/event.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div>
+			<input type="button" value="按钮" id="btn1"/>
+			<input type="button" value="按钮2" id="btn2"/>
+			<input type="button" />
+		</div>
+		
+		<script type="text/javascript">
+			var btn = document.getElementById('btn1');
+			var btn2 = document.getElementById('btn2');
+			var div = document.getElementsByTagName('div')[0];
+			eventUtil.addHandler(div,'click',function(){
+				alert('我是DIV上的元素');
+			});
+			eventUtil.addHandler(btn,'click',function(){
+				alert(this.value);
+			});
+//			div.onclick = function(){
+//				alert('这是div 事件');
+//			}
+//			btn2.onclick=function(){
+//				window.event.cancelBubble = true;
+//				alert(window.event.srcElement);
+//			}
+//			function fn1() {
+//				alert("hello");
+//			}
+//			function fn2() {
+//				alert(this.value);
+//			}
+//			btn.addEventListener('click', fn1, false);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>基础动画</title>
+<style type="text/css">
+	html,body,div {
+		padding: 0;
+		margin: 0;
+	}
+	#box {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100px;
+		height: 100px;
+		background-color: lightblue;
+	}
+</style>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/javascript" src="../js/utils.js"></script>
+<script type="text/javascript">
+	var oBox = document.getElementById('box');
+	var maxLeft = document.documentElement.clientWidth || document.body.clientWidth;
+</script>
+</body>
+</html>

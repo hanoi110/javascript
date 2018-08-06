@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+			body {
+				height: 5000px;
+			}
+			img {
+				position: absolute;
+				padding: 10px 0;
+				border: 1px solid #ccc;
+				cursor: pointer;
+			}
+        </style>
+    </head>
+    <body>
+    <img src="./images/wifi.png" height="32" width="32">
+    <script type="text/javascript" src="./animate.js"></script>
+    <script type="text/javascript">
+    var img = document.getElementsByTagName('img')[0];
+    var timer =0,
+    	targetx = 0,
+    	targety = 0,
+    	leaderx = 0,
+    	leadery = 0;
+   	//给整个文档绑定点击事件获取鼠标位置
+   	document.onclick = function(event) {
+   		//1.兼容获取事件对象
+   		event = event || window.event;
+   		//2.兼容获取鼠标在页面的位置 = 被卷起的部分+可视部分
+   		var pagey = event.pageY || scroll().top + event.clientY;
+   		var pagex = event.pageX || scroll().left + event.clientX;
+
+   		targety = pagey - 16;
+   		targetx = pagex - 16;
+
+   		clearInterval(timer);
+   		timer = setInterval(function() {
+   			leaderx = img.offsetLeft;
+   			var stepx = (targetx-leaderx)/10;
+   			stepx = stepx>0?Math.ceil(stepx):Math.floor(stepx);
+   			leaderx = leaderx + stepx;
+   			img.style.left = leaderx + "px";
+
+   			leadery = img.offsetTop;
+   			var stepy = (targety-leadery)/10;
+   			stepy = stepy>0?Math.ceil(stepy):Math.floor(stepy);
+   			leadery = leadery + stepy;
+   			img.style.top = leadery + "px";
+   			//console.log(1);
+
+   			if (Math.abs(targety-img.offsetTop)<=Math.abs(stepy) && Math.abs(targetx-img.offsetLeft)<=Math.abs(stepx)) {
+   				img.style.left = targetx +'px';
+   				img.style.top = targety +'px';
+   				clearInterval(timer);
+   			}
+   		},25);
+   	} 
+    </script>
+    </body>
+</html>

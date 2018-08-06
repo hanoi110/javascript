@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>定时器</title>
+		<style type="text/css">
+			#target {
+				position: fixed;
+				bottom: 100px;
+				right: 50px;
+				width: 100px;
+				height: 100px;
+				text-align: center;
+				line-height: 100px;
+				background-color: burlywood;
+				border-radius: 50%;
+				cursor: pointer;
+				opacity: .2;
+				display: none;
+			}
+			#target:hover {
+				opacity: 1;
+			}
+			.box {
+				height: 4000px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">s</div>
+		<div id="target">返回顶部</div>
+		<script type="text/javascript">
+			//1.倒计时
+			var n = 0;
+			/*var timer = window.setInterval(function () {
+				n++;
+				if (n === 5) {
+					window.clearTimeout(timer);
+				}
+			}, 1000);*/
+			
+			//2.setTimeout实现多次运动的动画
+			var timer = null; 
+			function move() {
+				//要使用定时器，先清除定时器
+				window.clearTimeout(timer);
+				n++;
+				document.write(n);
+				if (n === 5) {
+					window.clearTimeout(timer);
+				} else {
+					timer = window.setTimeout(move, 1000);
+				}				
+			}
+//			move();
+		</script>
+		<script type="text/javascript">
+			var goLink = document.getElementById('target');
+			//1.滚动到一定高度时才显示go按钮
+			//2.点击后GO立刻隐藏
+			window.onscroll = computedDisplay;
+			function computedDisplay() {
+				var curTop = document.documentElement.scrollTop || document.body.scrollTop;
+				var curHeight = document.documentElement.clientHeight || document.body.clientHeight;
+				goLink.style.display = curTop > curHeight ? "block" : "none";
+			}
+					
+			/*->返回顶部动画：
+			* 总时间（duration）:500ms
+			* 频率（interval）:多长走一步 10ms
+			* 总距离（target）:当前的位置（当前的scrollTop值）- 目标位置(0)
+			* 步长(step):每一次走的距离   target/duration*interval
+			* */
+			
+			goLink.onclick = function() {
+				//点击隐藏go,并取消window.onscroll
+				this.style.display = 'none';
+				window.onscroll = null;
+				//->当点击go的时候，首先把每一步要走的步长计算出来
+				var duration = 500,
+					interval = 10,
+					target = document.documentElement.scrollTop || document.body.scrollTop,
+					step = target/duration*interval;
+				
+				//->计算完成步长后，让当前的页面每隔inetrval这么长的时间走一步；在上一次的scrollTop的基础上-步长
+				var timer  = setInterval(function() {
+					var curTop = document.documentElement.scrollTop || document.body.scrollTop;
+					
+					if (curTop === 0) {
+						window.clearInterval(timer);
+						window.onscroll = computedDisplay;//动画完成后在绑定
+						return;
+					}
+					curTop -= step;
+					document.documentElement.scrollTop = curTop;
+					document.body.scrollTop = curTop;
+				}, interval);	
+			}
+		</script>
+		
+	</body>
+</html>

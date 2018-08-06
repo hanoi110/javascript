@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta charset="UTF-8">
+<title>获取某一容器的元素子节点</title>
+</head>
+<body>
+<div id="box" class="box bg1">
+	<div class="w1 w2"></div>
+	<div class="w1"></div>
+	<div class="w2 w3">
+		<p></p>
+		<p></p>
+	</div>
+	<p class="w1 w2 w3"></p>
+	<p></p>
+	<p></p>
+</div>
+<script type="text/javascript">
+function children(curEle) {
+	var ary = [];
+	//IE6|7|8 不能使用内置的children
+	if (/MSIE (6|7|8)/i.test(navigator.userAgent)) {
+		var nodeList = curEle.childNodes;
+		for (var i = 0; i<nodeList.length; i++) {
+			var curNode = nodeList[i];
+			if (curNode.nodeType === 1) {
+				ary[ary.length] = curNode;
+			}
+		}
+	} else {
+	//标准浏览器 直接使用children
+		ary = Array.prototype.slice.call(curEle.children);
+	}
+	return ary;
+}
+
+// function next(curEle) {
+// 	if (/*IE浏览器*/) {
+// 		return curEle.nextElementSibling;
+// 	}
+// 	var curNex = curEle.nextSibling;
+// 	while (curNex && curNex.nodeType !== 1) {
+// 		curNex = curNex.nextSibling;
+// 	}
+// 	return curNex;
+// }
+function nextAll(curEle) {
+	var ary = [];
+	var next = this.next(curEle);
+	while (next) {
+		ary.push(next);
+		next = this.next(next);
+	}
+	return ary;
+}
+function hasCls(element,cls) {
+	var reg = new RegExp("(^| +)" + cls + "( +|$)");
+	return reg.test(element.className);
+}
+function addCls(element,cls) {
+	var ary = cls.split(/\s+/g);
+	for (var i=0; i<ary.length; i++) {
+		var curCls = ary[i];
+		if ( !hasCls(element,curCls)) {
+		element.className += ' ' + curCls;
+		}
+	}
+}
+function delCls(element,cls) {
+	var ary = cls.split(/\s+/g);
+	for (var i=0; i<ary.length; i++) {
+		var curCls = ary[i];
+		if ( hasCls(element,curCls)) {
+			var reg = new RegExp("(^| +)" + curCls + "( +|$)","g");
+			element.className = element.className.replace(reg, ' ');
+		}
+	}
+}
+function getElementsByClassName(className,context) {
+	//context上下文
+	context = context || document;
+	//存储数组
+	var ary = [];
+	//把传递来的样式类名的首尾空格去掉，然后在按照中间的空格把他的每一项拆分成数组
+	var classNameAry = className.replace(/^\s+|\s+$/g,'').split(/\s+/g);
+	//获取指定上下文的所有的元素标签，循环这些标签，获取每个标签的className样式类名的字符串
+	var nodeList = context.getElementsByTagName('*');
+	//flag(假设classNameAry中 有我们想要的class)
+	var flag = true;
+	//循环遍历
+	for ( var i =0; i<nodeList.length; i++) {
+		var curNode = nodeList[i];
+		//判断curNode.className中是否包含我们想要的className
+		for (var k =0; k<classNameAry.length; k++) {
+			var reg = new RegExp("(^| +)"+ classNameAry[k] +"( +|$)");
+			if (!reg.test(curNode.className)) {
+				flag = false;
+				break;
+			}
+		}
+		//那每一个标签分别和所有的样式类名比较后，如果结果还是true的话吗，说明当前元素标签包含所有的样式，也是我们想要的
+		if (flag) {
+			ary.push(curNode);
+		}
+	}
+	return ary;
+}
+console.log(getElementsByClassName('w3'));
+var box = document.getElementById('box');
+
+</script>
+</body>
+</html>

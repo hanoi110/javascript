@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>简单的表格排序</title>
+		<style type="text/css">
+			ul,button {
+				width: 300px;
+				margin: 0 auto;
+			}
+			ul li {
+				text-align: left;
+				list-style: none;
+				height: 30px;
+				line-height: 30px;
+				border-bottom: 1px dotted salmon;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="uls">
+			<li>98</li>
+			<li>99</li>
+			<li>96</li>
+			<li>90</li>
+			<li>95</li>
+		</ul>
+		<button id="btn">进行排序</button>
+		<script src="../js/utils.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var uls = document.getElementById('uls');
+			var oLis = document.getElementsByTagName('li');
+			var btn = document.getElementById('btn');
+			//1.先把元素集合类数组转化为数组
+			var aryLi = utils.listToArray(oLis);
+			//2.给数组排序
+			aryLi.sort(function(a,b){
+				return parseFloat(a.innerHTML)>parseFloat(b.innerHTML);
+			});
+			//3.按照ary中存储的最新顺序依次的把对应的LI添加到页面中
+			btn.onclick = function() {
+				var frg = document.createDocumentFragment();
+				for (var i=0; i<aryLi.length; i++) {
+					frg.appendChild(aryLi[i]);
+				}
+				uls.appendChild(frg);
+				frg =null;
+			}
+		</script>
+	</body>
+</html>

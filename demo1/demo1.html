@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta charset="UTF-8">
+		<title>demo1</title>
+		<style type="text/css">
+			.box {width: 1000px; margin: 0 auto; text-align: center;}
+			h2 {background-color: rgba(0,0,0,.1);}
+			.box > div {
+				width: 500px; 
+				height: 100px;
+				margin: 0 auto;
+				line-height: 100px;
+				text-align: center;
+				background-color: greenyellow;
+				color: #000;
+			}
+			.box > div > span {
+				margin-left: 10px;
+				color: red;
+				font: 24px/24px "微软雅黑";
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<h2>问题： 132132132</h2>
+			<div id="btn">
+				赞同<span id="spanNum">0</span>
+			</div>
+		</div>
+		<script type="text/javascript">
+				//私有属性
+				var btn = document.getElementById('btn');
+				btn.count = 0;
+				btn.onclick = function() {		
+					document.getElementById('spanNum').innerText = ++this.count;
+				}
+
+		</script>
+	</body>
+</html>

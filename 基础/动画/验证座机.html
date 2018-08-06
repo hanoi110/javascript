@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+<div class="box">
+<input type="text" />
+<span>请输入！</span>
+</div>
+<script type="text/javascript">
+	var inp = document.getElementsByTagName('input')[0];
+	var span = inp.nextElementSibling || inp.nextSibling;
+//onblur失去焦点后执行
+	inp.onblur = function () {
+		var reg = /^[\u4e00-\u9fa5]{2,4}$/;
+		if (reg.test(inp.value)) {
+			span.style.color = 'green';
+			span.innerHTML = '恭喜您，输入正确！';
+		} else {
+			span.style.color = 'red';
+			span.innerHTML = '对不起，您输入的为非法字符！';
+		}
+	}
+
+	//字符串的三个方法：
+	//1.trim()去除前后空格
+	//2.replace()替换和全局替换值
+	//3.search()给字符差索引
+	//
+	var str = "abcdefg";
+	console.log(str.search(/bc/));
+	console.log(str.indexOf("bc"));
+</script>
+</body>
+</html>
